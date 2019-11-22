@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 public class MilSymGuiActions
 {
-   String MilSymString =  "S---------------" ;
-   Sting MilArray =
+   StringBuilder MilSymString =  new StringBuilder("S---------------" );
+
 
 
     public MilSymGuiActions()
@@ -33,7 +33,7 @@ public class MilSymGuiActions
         https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html
         */
         JMenuBar menuBar;
-        JMenu  menu,submenu,aboutMenu;
+        JMenu  menu,submenu,aboutMenu,nodeMenu;
         JMenuItem menuItem;
         JRadioButtonMenuItem rbMenuItem, dDSNodeMenuItem, pubMenuItem, logMenuItem;
         JRadioButtonMenuItem  dDSMetMenuItem, stopPubMenuItem, stopLogMenuItem;
@@ -96,36 +96,38 @@ public class MilSymGuiActions
         aboutMenu = new JMenu("About");
         menuItem = new JMenuItem("DST - LD - SITN");
         aboutMenu.add(menuItem);
-
         menuBar.add(aboutMenu);
+
+        nodeMenu = new JMenu("NODES");
+        menuItem = new JMenuItem("Change Node symbols");
+        nodeMenu.add(menuItem);
+
+        menuBar.add(nodeMenu);
+
+
 
         frame.setJMenuBar (menuBar);
 /* sert up the drop down lists*/
         String[] iFFStrings = { "Friend", "Hostile", "Neutral", "Null"};
        char[] iFFChars = { 'F', 'H', 'N','-'};
 
+        JLabel affiliationLabel = new JLabel("Affiliation");
+        affiliationLabel.setBounds(400, 100, 140, 40);
+        frame.add(affiliationLabel);
         //Create the combo box, select item at index 4.
         //Indices start at 0, so 4 specifies the pig.
         JComboBox petList = new JComboBox(iFFStrings);
-        petList.setSelectedIndex(2);
+        petList.setSelectedIndex(3);
        petList.setBounds(400, 120, 140, 40);
         frame.add(petList);
 
 
 
-        JButton debugButton = new JButton("debug", new ImageIcon("debug.png"));
-        debugButton.setBounds(400, 120, 140, 40);
-        // frame.add(cloButton);
-
-
 
         JTextField JT = new JTextField("");
 
-        JT.setBounds(100, 300, 500, 1000);
-       // JT.setBackground(new Color(0,0,0,200));
-       // JT.setOpaque(false);
 
-        JT.setText(Arrays.toString(MilSymString));
+        JT.setText(MilSymString.toString());
         frame.add(JT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -165,8 +167,8 @@ Set up the Gui Listeners
         {
             public void actionPerformed(ActionEvent e)
             {
-                MilSymString[1]=iFFChars[petList.getSelectedIndex()];
-                JT.setText(Arrays.toString(MilSymString));
+                MilSymString.setCharAt(1,iFFChars[petList.getSelectedIndex()]);
+                JT.setText(MilSymString.toString());
 
             }
         });
@@ -180,16 +182,7 @@ Set up the Gui Listeners
             }
         });
 
-        debugButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
 
-                System.out.println("canvas node 1");
-
-            }
-
-        });
         JT.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
