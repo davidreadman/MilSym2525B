@@ -109,7 +109,7 @@ public class MilSymGuiActions
         frame.setJMenuBar (menuBar);
 /* sert up the drop down lists*/
         String[] iFFStrings = { "Friend", "Hostile", "Neutral", "Null"};
-       char[] iFFChars = { 'F', 'H', 'N','-'};
+        char[] iFFChars = { 'F', 'H', 'N','-'};
 
         JLabel affiliationLabel = new JLabel("Affiliation");
         affiliationLabel.setBounds(400, 100, 140, 40);
